@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'app_constants.dart';
 
 class MapScreen extends StatelessWidget {
-  const MapScreen({super.key});
+  final MapController _mapController = MapController();
 
-  void launchUrl(Uri uri) {
-    // Launch the URL in a web browser
-  }
+  MapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
+      mapController: _mapController,
       options: const MapOptions(
         initialCenter: LatLng(51.509364, -0.928928),
         initialZoom: 2.2,
+        minZoom: 2.2,
+        maxZoom: 18.0,
       ),
       children: [
         TileLayer(
-          urlTemplate: AppConstants.urlTemplate,
+          urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
           userAgentPackageName: 'com.example.app',
         ),
         PolylineLayer(
@@ -39,7 +39,6 @@ class MapScreen extends StatelessWidget {
           circles: [
             CircleMarker(
               point: const LatLng(52.2677, 5.1689),
-              // center of 't Gooi
               radius: 5000,
               useRadiusInMeter: true,
               color: Colors.red.withOpacity(0.3),

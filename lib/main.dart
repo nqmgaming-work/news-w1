@@ -5,8 +5,8 @@ import 'gradient_container.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
-  runApp(const MaterialApp(
-    home: NewWidget(),
+  runApp( MaterialApp(
+    home:MapScreen(),
   ));
 }
 
@@ -21,10 +21,10 @@ class NewWidget extends StatelessWidget {
       body: Stack(
         children: [
           MapScreen(),
-          GradientContainer([
-            Colors.blue,
-            Colors.green,
-          ]),
+          // GradientContainer([
+          //   Colors.blue,
+          //   Colors.green,
+          // ]),
         ],
       ),
     );

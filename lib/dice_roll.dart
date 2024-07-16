@@ -31,6 +31,12 @@ class _DiceRollState extends State<DiceRoller> {
     });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
+
   void rollDice() {
     setState(() {
       currentDiceRoll = random.nextInt(6) + 1;
@@ -49,15 +55,13 @@ class _DiceRollState extends State<DiceRoller> {
         Image.asset(
           "assets/images/dice-$currentDiceRoll.png",
           width: 200,
+          errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
         ),
         const SizedBox(height: 20),
         Text(
           _currentTime,
           style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600
-          ),
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 20),
         TextButton(

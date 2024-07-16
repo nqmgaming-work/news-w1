@@ -1,7 +1,10 @@
+import 'package:first_pj/map_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'gradient_container.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MaterialApp(
     home: NewWidget(),
   ));
@@ -14,10 +17,16 @@ class NewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const Scaffold(
-        body: GradientContainer([
-      Color.fromARGB(100, 100, 100, 12),
-      Colors.red,
-    ]));
+    return Scaffold(
+      body: Stack(
+        children: [
+          MapScreen(),
+          GradientContainer([
+            Colors.blue,
+            Colors.green,
+          ]),
+        ],
+      ),
+    );
   }
 }

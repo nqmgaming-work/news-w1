@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../util/logger.dart';
+import '../../util/logger.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen(

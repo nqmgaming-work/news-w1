@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import '../../data/questions.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key, required this.chosenAnswers});
+  const ResultScreen(
+      {super.key, required this.chosenAnswers, required this.onRestart});
+
+  final Function() onRestart;
 
   final List<String> chosenAnswers;
 
@@ -27,7 +30,7 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final summaryData = getSummaryData();
-    final numTotalQuestions = questions.length;
+    final numTotalQuestions = questions.length - 1;
     final numCorrectAnswers = summaryData
         .where((data) => data["correct_answer"] == data["user_answer"])
         .length;
@@ -35,6 +38,13 @@ class ResultScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Icon(
+          numCorrectAnswers == numTotalQuestions
+              ? Icons.emoji_events
+              : Icons.sentiment_very_dissatisfied,
+          color: Colors.white,
+          size: 100,
+        ),
         Text(
           "You answered $numCorrectAnswers out of $numTotalQuestions questions correctly!",
           style: const TextStyle(
@@ -49,12 +59,10 @@ class ResultScreen extends StatelessWidget {
           height: 30,
         ),
         TextButton.icon(
-          onPressed: () {},
+          onPressed: onRestart,
           label: const Text("Restart Quiz!"),
           icon: const Icon(Icons.refresh),
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.white
-          ),
+          style: TextButton.styleFrom(foregroundColor: Colors.white),
         )
       ],
     );

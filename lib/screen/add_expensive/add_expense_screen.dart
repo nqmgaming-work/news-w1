@@ -1,3 +1,4 @@
+import 'package:first_pj/screen/add_expensive/widget/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -25,12 +26,10 @@ class _AddExpenseState extends State<AddExpense> {
             child: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.date,
               onDateTimeChanged: (pickedDate) {
-                if (pickedDate != null) {
-                  // Format and set the date to the controller
-                  String formattedDate = DateFormat('yyyy-MM-dd')
-                      .format(pickedDate); // Use your preferred date format
-                  _dateController.text = formattedDate;
-                }
+                // Format and set the date to the controller
+                String formattedDate = DateFormat('yyyy-MM-dd')
+                    .format(pickedDate); // Use your preferred date format
+                _dateController.text = formattedDate;
               },
               initialDateTime: DateTime.now(),
               minimumYear: 2000,
@@ -69,120 +68,37 @@ class _AddExpenseState extends State<AddExpense> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          TextField(
+          CustomTextField(
             controller: _titleController,
-            maxLength: 50,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              label: const Text('Title'),
-              prefixIcon: const Icon(Icons.title),
-              labelStyle: const TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                fontFamily: 'Roboto',
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(
-                  color: Colors.black,
-                  width: 1,
-                ),
-              ),
-              helperText: 'Enter the title of the expense',
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(
-                  color: Colors.black,
-                  width: 1,
-                ),
-              ),
-            ),
-            cursorColor: Colors.black,
-            cursorHeight: 20,
+            labelText: 'Title',
+            prefixIcon: Icons.title,
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
-                child: TextField(
+                child: CustomTextField(
                   controller: _amountController,
-                  maxLength: 10,
+                  labelText: 'Amount',
+                  prefixIcon: Icons.attach_money,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    label: const Text('Amount'),
-                    prefixIcon: const Icon(Icons.attach_money),
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Roboto',
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                    ),
-                    helperText: 'Enter the amount of the expense',
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  cursorColor: Colors.black,
-                  cursorHeight: 20,
-                  textInputAction: TextInputAction.done,
                 ),
               ),
               const SizedBox(width: 10),
               // Date
               Expanded(
-                child: TextField(
+                child: CustomTextField(
                   controller: _dateController,
-                  readOnly: true,
-                  onTap: () async {
+                  labelText: 'Date',
+                  prefixIcon: Icons.calendar_today,
+                  onTap: () {
                     if (Theme.of(context).platform == TargetPlatform.iOS) {
                       _showIOSDatePicker(context);
                     } else {
-                      await _showAndroidDatePicker(context);
+                      _showAndroidDatePicker(context);
                     }
                   },
-                  maxLength: 30,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    label: const Text('Date'),
-                    prefixIcon: const Icon(Icons.calendar_today),
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Roboto',
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                    ),
-                    helperText: 'Enter the date of the expense',
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  cursorColor: Colors.black,
-                  cursorHeight: 20,
-                  textInputAction: TextInputAction.done,
                 ),
               )
             ],

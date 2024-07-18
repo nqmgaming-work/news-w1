@@ -10,19 +10,10 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.amber,
-      shadowColor: Colors.black,
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      borderOnForeground: true,
-      margin: const EdgeInsets.all(10),
-      surfaceTintColor: Colors.red,
-      clipBehavior: Clip.hardEdge,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               expense.title,
@@ -32,6 +23,7 @@ class ExpenseItem extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Roboto',
               ),
+              textAlign: TextAlign.start,
             ),
             const SizedBox(height: 10),
             Row(

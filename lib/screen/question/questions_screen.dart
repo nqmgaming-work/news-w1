@@ -2,9 +2,12 @@ import 'package:first_pj/data/questions.dart';
 import 'package:first_pj/screen/question/view/answer_button.dart';
 import 'package:first_pj/util/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+
+  final void Function(String chooseAnswer) onSelectAnswer;
 
   @override
   State<QuestionsScreen> createState() {
@@ -15,7 +18,8 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreen extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
     setState(() {
       currentQuestionIndex++;
     });
@@ -31,7 +35,12 @@ class _QuestionsScreen extends State<QuestionsScreen> {
         children: [
           Text(
             currentQuestion.text,
-            style: const TextStyle(color: Colors.white),
+            style: GoogleFonts.lato(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(
             height: 30,
@@ -53,7 +62,7 @@ class _QuestionsScreen extends State<QuestionsScreen> {
               answerText: answer,
               onPressed: () {
                 logger.i("Button pressed");
-                answerQuestion();
+                answerQuestion(answer);
               },
             );
           }),

@@ -1,4 +1,6 @@
+import 'package:first_pj/data/questions.dart';
 import 'package:first_pj/screen/question/questions_screen.dart';
+import 'package:first_pj/screen/result/result_screen.dart';
 import 'package:first_pj/screen/start/start_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +17,22 @@ class _QuizState extends State<Quiz> {
   // Widget? activeScreen;
 
   String activeScreen = "StartScreen";
+  final List<String> selectedAnswers = [];
 
   // @override
   // void initState() {
   //   activeScreen = StartScreen(switchScreen);
   //   super.initState();
   // }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length - 1) {
+      setState(() {
+        activeScreen = "ResultScreen";
+      });
+    }
+  }
 
   void switchScreen() {
     setState(() {
@@ -33,7 +45,9 @@ class _QuizState extends State<Quiz> {
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == "QuestionsScreen") {
-      screenWidget = const QuestionsScreen();
+      screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
+    } else if (activeScreen == "ResultScreen") {
+      screenWidget = ResultScreen(chosenAnswers: selectedAnswers);
     } else {
       screenWidget = StartScreen(switchScreen);
     }

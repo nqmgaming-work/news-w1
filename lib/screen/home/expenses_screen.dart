@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../model/category.dart';
 import '../../model/expense.dart';
+import '../add_expensive/add_expense_screen.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -16,25 +17,25 @@ class Expenses extends StatefulWidget {
 class _ExpensiveState extends State<Expenses> {
   final List<Expense> _expenses = [
     Expense(
-      title: 'New Shoes',
+      title: 'Pizza',
       amount: 69.99,
       date: DateTime.now(),
       category: Category.food,
     ),
     Expense(
-      title: 'Weekly Groceries',
+      title: 'Shoes',
       amount: 16.53,
       date: DateTime.now(),
       category: Category.leisure,
     ),
     Expense(
-      title: 'New Headphones',
+      title: 'Gas',
       amount: 99.99,
       date: DateTime.now(),
       category: Category.travel,
     ),
     Expense(
-      title: 'Monthly Rent',
+      title: 'Salary',
       amount: 450.00,
       date: DateTime.now(),
       category: Category.work,
@@ -43,13 +44,14 @@ class _ExpensiveState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
-        context: context, builder: (context) => const Text('Add Expense'));
+        context: context, builder: (context) => const AddExpense());
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Expenses'),
           actions: [

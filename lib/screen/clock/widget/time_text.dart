@@ -45,7 +45,7 @@ class _TimeTextState extends State<TimeText> with SingleTickerProviderStateMixin
   }
 
   String _formatDateTime(DateTime dateTime) {
-    return DateFormat('HH:mm').format(dateTime);
+    return DateFormat('mm:ss').format(dateTime);
   }
 
   @override

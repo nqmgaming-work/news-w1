@@ -7,10 +7,8 @@ class ClockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(57, 56, 56, 0.9019607843137255),
-      body: Center(
-          child: Stack(
+    return Center(
+      child: Stack(
         alignment: Alignment.center,
         children: [
           Text(
@@ -22,9 +20,9 @@ class ClockScreen extends StatelessWidget {
                 fontSize: 70,
                 color: Colors.grey.withOpacity(0.5)),
           ),
-          TimeText(),
+          const TimeText(),
         ],
-      )),
+      ),
     );
   }
 }

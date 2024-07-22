@@ -12,28 +12,35 @@ class TimeText extends StatefulWidget {
   }
 }
 
-class _TimeTextState extends State<TimeText> {
+class _TimeTextState extends State<TimeText> with SingleTickerProviderStateMixin {
   late String _timeString = _formatDateTime(DateTime.now());
   late Timer _timer;
-  double _opacity = 1.0;
+  late AnimationController _animationController;
+  late Animation<double> _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
     _timer =
         Timer.periodic(const Duration(seconds: 1), (Timer t) => _updateTime());
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 5000),
+      vsync: this,
+    );
+    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    // Bắt đầu animation ngay khi initState
+    _animationController.repeat(reverse: true);
   }
 
   void _updateTime() {
     setState(() {
       _timeString = _formatDateTime(DateTime.now());
-      _opacity = 0.0;
-    });
-
-    Future.delayed(const Duration(milliseconds: 50), () {
-      setState(() {
-        _opacity = 1.0;
-      });
     });
   }
 
@@ -44,23 +51,28 @@ class _TimeTextState extends State<TimeText> {
   @override
   void dispose() {
     _timer.cancel();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: _opacity,
-      duration: const Duration(milliseconds: 500),
-      child: Text(
-        _timeString,
-        style: TextStyle(
-            fontFamily: FontConstants.e1234,
-            fontWeight: FontWeight.w800,
-            fontStyle: FontStyle.italic,
-            fontSize: 70,
-            color: Colors.white.withOpacity(0.9)),
-      ),
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (BuildContext context, Widget? child) {
+        return Opacity(
+          opacity: _opacityAnimation.value,
+          child: Text(
+            _timeString,
+            style: TextStyle(
+                fontFamily: FontConstants.e1234,
+                fontWeight: FontWeight.w800,
+                fontStyle: FontStyle.italic,
+                fontSize: 70,
+                color: Colors.black.withOpacity(0.9)),
+          ),
+        );
+      },
     );
   }
 }

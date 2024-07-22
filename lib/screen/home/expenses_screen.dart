@@ -1,3 +1,4 @@
+import 'package:first_pj/screen/home/widget/expense_chart.dart';
 import 'package:first_pj/screen/home/widget/expenses_list.dart';
 import 'package:flutter/material.dart';
 
@@ -113,7 +114,7 @@ class _ExpensiveState extends State<Expenses> {
         ),
         body: Column(
           children: [
-            const Text('The chart'),
+            ExpenseChart(expenseList: _expenses),
             Expanded(
               child: mainContent,
             ),

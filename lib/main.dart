@@ -29,6 +29,29 @@ Future main() async {
           margin: EdgeInsets.all(10),
         ),
       ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
+        snackBarTheme: const SnackBarThemeData(
+            behavior: SnackBarBehavior.floating, actionTextColor: Colors.white),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            foregroundColor: MaterialStateProperty.all(Colors.white),
+          ),
+        ),
+        cardTheme: const CardTheme(
+          color: Colors.amber,
+          shadowColor: Colors.black,
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          margin: EdgeInsets.all(10),
+        ),
+      ),
+      themeMode: ThemeMode.dark,
     ),
   );
 }

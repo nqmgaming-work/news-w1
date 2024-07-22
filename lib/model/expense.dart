@@ -17,6 +17,23 @@ class Expense {
       required this.category})
       : id = const Uuid().v4();
 
+  String get colorByCategory {
+    switch (category) {
+      case Category.food:
+        return '0xFFff0000';
+      case Category.work:
+        return '0xFF00ff00';
+      case Category.travel:
+        return '0xFFff00ff';
+      case Category.leisure:
+        return '0xFF0000ff';
+      case Category.other:
+        return '0xFF000000';
+      default:
+        return '0xFF000000';
+    }
+  }
+
   String getFormattedDate() {
     var formatter = DateFormat.yMMMd();
     return formatter.format(date);

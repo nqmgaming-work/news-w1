@@ -1,4 +1,3 @@
-import 'package:first_pj/screen/clock/clock_screen.dart';
 import 'package:first_pj/screen/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

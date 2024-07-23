@@ -1,4 +1,4 @@
-import 'package:first_pj/screen/home/home_screen.dart';
+import 'package:first_pj/screen/app/app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,10 +12,9 @@ Future main() async {
     statusBarIconBrightness: Brightness.light,
   ));
   runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Scaffold(
-      backgroundColor: Colors.black,
-      body: HomeScreen(),
-    )
-  ));
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: AppScreen(),
+      )));
 }

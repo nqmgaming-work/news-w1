@@ -16,6 +16,8 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   flutter_dotenv: ^5.1.0
+  google_fonts: ^6.2.1
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -25,13 +27,12 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   fonts:
-    - family: E1234
+    - family: ProductSans
       fonts:
-        - asset: assets/fonts/E1234.ttf
-    - family: E12345-Italic
-      fonts:
-        - asset: assets/fonts/E1234-Italic.ttf
-          style: italic
+        - asset: assets/fonts/Product-Sans-Regular.ttf
+        - asset: assets/fonts/Product-Sans-Bold.ttf
+        - asset: assets/fonts/Product-Sans-Italic.ttf
+        - asset: assets/fonts/Product-Sans-Bold-Italic.ttf
 
   assets:
     - .env

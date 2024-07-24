@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
-import 'digital-clock-painter.dart';
+import 'digital_clock_painter.dart';
 
 class TimeText extends StatefulWidget {
   const TimeText({super.key});

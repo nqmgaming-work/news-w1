@@ -1,10 +1,13 @@
 import 'package:first_pj/constants/font_constants.dart';
-import 'package:first_pj/screen/clock/widget/digital-clock-painter.dart';
+import 'package:first_pj/screen/clock/widget/digital_clock_painter.dart';
+import 'package:first_pj/screen/clock/widget/regular_polygon_painter.dart';
 import 'package:first_pj/screen/clock/widget/time_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ClockScreen extends StatelessWidget {
   const ClockScreen({super.key, required this.backgroundImage});
+
   final String backgroundImage;
 
   @override
@@ -14,7 +17,7 @@ class ClockScreen extends StatelessWidget {
         title: const Text('Home'),
       ),
       body: Container(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(backgroundImage),
             // Replace with your image
@@ -24,17 +27,24 @@ class ClockScreen extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.only(bottom: 350),
-            child: Stack(
-              alignment: Alignment.center,
+            child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 19.0, right: 6),
-                  child: CustomPaint(
-                    size: const Size(150, 100),
-                    painter: DigitalClockPainter(time: '00:00', color: Colors.grey),
-                  ),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 19.0, right: 6),
+                      child: CustomPaint(
+                        size: const Size(150, 100),
+                        painter: DigitalClockPainter(
+                            time: '00:00', color: Colors.grey),
+                      ),
+                    ),
+                    const TimeText(),
+                  ],
                 ),
-                const TimeText(),
+                const Expanded(child: RegularPolygon(sides: 10)),
+                const Spacer()
               ],
             ),
           ),

@@ -30,7 +30,8 @@ class DigitalClockPainter extends CustomPainter {
     final segmentThickness = size.height / 20;
     final digitWidth = size.width / 4;
     final digitHeight = size.height / 2;
-    final digitSpacing = 5.0; // Space between digits
+    const digitSpacing = 10.0; // Space between digits
+    const colonSize = 8.0; // Size of the square dots for colon
 
     void drawSegment(int segment, Offset offset) {
       final Path path = Path();
@@ -112,25 +113,45 @@ class DigitalClockPainter extends CustomPainter {
       }
     }
 
+    void drawColon(Offset offset) {
+      final rect1 =
+          Rect.fromLTWH(offset.dx - 5, offset.dy + 10, colonSize, colonSize);
+      final rect2 = Rect.fromLTWH(
+          offset.dx - 5, offset.dy + 2 * colonSize + 10, colonSize, colonSize);
+      canvas.drawRect(rect1, paint);
+      canvas.drawRect(rect2, paint);
+    }
+
+    // Tính toán tổng chiều rộng của đồng hồ
     double totalWidth = 0;
     for (int i = 0; i < time.length; i++) {
       if (time[i] == ':') {
-        totalWidth += digitSpacing;
+        totalWidth +=
+            colonSize + digitSpacing; // Cộng thêm khoảng cách cho dấu hai chấm
       } else {
-        totalWidth += digitWidth + digitSpacing;
+        totalWidth += digitWidth;
+        // Chỉ cộng khoảng cách nếu không phải là chữ số cuối cùng
+        if (i < time.length - 1) {
+          totalWidth += digitSpacing;
+        }
       }
     }
-
+    // Căn giữa đồng hồ theo chiều ngang
     double currentX = (size.width - totalWidth) / 2;
+
+    // Vẽ từng chữ số và dấu hai chấm
     for (int i = 0; i < time.length; i++) {
       if (time[i] == ':') {
-        currentX += digitSpacing;
-        continue;
+        drawColon(Offset(currentX, size.height / 4));
+        currentX += colonSize + digitSpacing; // Increase spacing for colon
+      } else {
+        int digit = int.parse(time[i]);
+        drawDigit(digit, Offset(currentX, size.height / 4));
+        currentX += digitWidth;
+        if (i < time.length - 1) {
+          currentX += digitSpacing;
+        }
       }
-
-      int digit = int.parse(time[i]);
-      drawDigit(digit, Offset(currentX, size.height / 4));
-      currentX += digitWidth + digitSpacing;
     }
   }
 

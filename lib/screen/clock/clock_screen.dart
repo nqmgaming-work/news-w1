@@ -27,9 +27,12 @@ class ClockScreen extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                CustomPaint(
-                  size: const Size(300, 200),
-                  painter: DigitalClockPainter(time: '00:00', color: Colors.grey),
+                Padding(
+                  padding: const EdgeInsets.only(left: 19.0, right: 6),
+                  child: CustomPaint(
+                    size: const Size(150, 100),
+                    painter: DigitalClockPainter(time: '00:00', color: Colors.grey),
+                  ),
                 ),
                 const TimeText(),
               ],

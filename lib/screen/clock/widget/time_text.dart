@@ -12,7 +12,8 @@ class TimeText extends StatefulWidget {
   }
 }
 
-class _TimeTextState extends State<TimeText> with SingleTickerProviderStateMixin {
+class _TimeTextState extends State<TimeText>
+    with SingleTickerProviderStateMixin {
   late String _timeString = _formatDateTime(DateTime.now());
   late Timer _timer;
   late AnimationController _animationController;
@@ -62,12 +63,15 @@ class _TimeTextState extends State<TimeText> with SingleTickerProviderStateMixin
       builder: (BuildContext context, Widget? child) {
         return Opacity(
           opacity: _opacityAnimation.value,
-          child: SizedBox(
-            width: 300,
-            height: 200,
-            child: CustomPaint(
-              size: const Size(300, 200),
-              painter: DigitalClockPainter(time: _timeString),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 19.0, right: 6),
+            child: SizedBox(
+              width: 150,
+              height: 100,
+              child: CustomPaint(
+                size: const Size(300, 200),
+                painter: DigitalClockPainter(time: _timeString),
+              ),
             ),
           ),
         );

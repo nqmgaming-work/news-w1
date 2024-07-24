@@ -32,6 +32,12 @@ flutter:
       fonts:
         - asset: assets/fonts/E1234-Italic.ttf
           style: italic
+    - family: digital-7
+      fonts:
+        - asset: assets/fonts/digital-7.ttf
+        - asset: assets/fonts/digital-7-italic.ttf
+        - asset: assets/fonts/digital-7-mono.ttf
+        - asset: assets/fonts/digital-7-mono-italic.ttf
 
   assets:
     - .env

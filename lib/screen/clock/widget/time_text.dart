@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
-import '../../../constants/font_constants.dart';
+import 'digital-clock-painter.dart';
 
 class TimeText extends StatefulWidget {
   const TimeText({super.key});
@@ -62,14 +62,13 @@ class _TimeTextState extends State<TimeText> with SingleTickerProviderStateMixin
       builder: (BuildContext context, Widget? child) {
         return Opacity(
           opacity: _opacityAnimation.value,
-          child: Text(
-            _timeString,
-            style: TextStyle(
-                fontFamily: FontConstants.e1234,
-                fontWeight: FontWeight.w800,
-                fontStyle: FontStyle.italic,
-                fontSize: 70,
-                color: Colors.black.withOpacity(0.9)),
+          child: SizedBox(
+            width: 300,
+            height: 200,
+            child: CustomPaint(
+              size: const Size(300, 200),
+              painter: DigitalClockPainter(time: _timeString),
+            ),
           ),
         );
       },

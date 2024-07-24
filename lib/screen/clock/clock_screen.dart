@@ -1,4 +1,5 @@
 import 'package:first_pj/constants/font_constants.dart';
+import 'package:first_pj/screen/clock/widget/digital-clock-painter.dart';
 import 'package:first_pj/screen/clock/widget/time_text.dart';
 import 'package:flutter/material.dart';
 
@@ -26,14 +27,9 @@ class ClockScreen extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Text(
-                  '00:00',
-                  style: TextStyle(
-                      fontFamily: FontConstants.e1234,
-                      fontWeight: FontWeight.w800,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 70,
-                      color: Colors.grey.withOpacity(0.5)),
+                CustomPaint(
+                  size: const Size(300, 200),
+                  painter: DigitalClockPainter(time: '00:00', color: Colors.grey),
                 ),
                 const TimeText(),
               ],

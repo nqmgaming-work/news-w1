@@ -1,8 +1,7 @@
-import 'package:first_pj/constants/font_constants.dart';
+import 'package:first_pj/screen/clock/widget/clock_widget.dart';
 import 'package:first_pj/screen/clock/widget/digital_clock_painter.dart';
 import 'package:first_pj/screen/clock/widget/regular_polygon_painter.dart';
 import 'package:first_pj/screen/clock/widget/time_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ClockScreen extends StatelessWidget {
@@ -43,8 +42,8 @@ class ClockScreen extends StatelessWidget {
                     const TimeText(),
                   ],
                 ),
-                const Expanded(child: RegularPolygon(sides: 10)),
-                const Spacer()
+                const Expanded(child: ClockWidget()),
+                const RegularPolygon(sides: 6),
               ],
             ),
           ),

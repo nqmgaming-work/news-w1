@@ -18,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void changeBackground(String imagePath) {
     setState(() {
-      print(imagePath);
       backgroundImage = imagePath;
     });
   }

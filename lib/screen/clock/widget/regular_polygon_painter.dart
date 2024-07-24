@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class RegularPolygonPainter extends CustomPainter {
-  final int sides;
+  int sides = 12;
 
   RegularPolygonPainter({required this.sides});
 

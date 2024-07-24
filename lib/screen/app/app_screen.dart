@@ -14,14 +14,6 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
-  String backgroundImage = "assets/images/bg1.jpeg"; // Default background image
-
-  void changeBackground(String imagePath) {
-    setState(() {
-      print(imagePath);
-      backgroundImage = imagePath;
-    });
-  }
 
   int _selectedIndex = 0;
 
@@ -30,6 +22,7 @@ class _AppScreenState extends State<AppScreen> {
       _selectedIndex = index;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +36,7 @@ class _AppScreenState extends State<AppScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: SizedBox(
-          height: 80,
+          height: 110,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -91,17 +84,8 @@ class _AppScreenState extends State<AppScreen> {
             ),
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(backgroundImage),
-              // Replace with your image
-              fit: BoxFit.cover, // Cover the entire screen
-            ),
-          ),
-          child: Center(
-            child: widgetOptions.elementAt(_selectedIndex),
-          ),
+        body:  Center(
+          child: widgetOptions.elementAt(_selectedIndex),
         ));
   }
 }

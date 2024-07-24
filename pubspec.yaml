@@ -26,6 +26,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - .env
+    - assets/images/
   fonts:
     - family: ProductSans
       fonts:
@@ -34,9 +37,6 @@ flutter:
         - asset: assets/fonts/Product-Sans-Italic.ttf
         - asset: assets/fonts/Product-Sans-Bold-Italic.ttf
 
-  assets:
-    - .env
-    - assets/images/
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

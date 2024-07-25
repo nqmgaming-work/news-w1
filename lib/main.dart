@@ -1,32 +1,14 @@
-import 'package:first_pj/map_screen.dart';
+import 'package:first_pj/core/themes/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'gradient_container.dart';
+
+import 'features/auth/presentation/pages/signup_pages.dart';
 
 Future main() async {
-  await dotenv.load(fileName: ".env");
-  runApp( MaterialApp(
-    home:MapScreen(),
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: ThemeApp.darkThemeMode,
+    home: SignUpPage(),
   ));
 }
 
-class NewWidget extends StatelessWidget {
-  const NewWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          MapScreen(),
-          // GradientContainer([
-          //   Colors.blue,
-          //   Colors.green,
-          // ]),
-        ],
-      ),
-    );
-  }
-}
+class AppTheme {}

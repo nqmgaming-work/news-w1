@@ -1,20 +1,19 @@
 import 'package:first_pj/core/themes/app_pallete.dart';
+import 'package:first_pj/features/auth/presentation/pages/signup_pages.dart';
 import 'package:first_pj/features/auth/presentation/widgets/auth_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/auth_gradient_button.dart';
 
-class SignUpPage extends StatefulWidget {
-  static route() => MaterialPageRoute(builder: (context) => const SignUpPage());
-
-  const SignUpPage({super.key});
+class LoginPage extends StatefulWidget {
+  static route() => MaterialPageRoute(builder: (context) => const LoginPage());
+  const LoginPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _LoginPageState extends State<LoginPage> {
   final fromKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -31,27 +30,21 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 60),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
           key: fromKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Sign up.",
+                "Login.",
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 30),
-              AuthField(
-                hintText: "Name",
-                controller: nameController,
-              ),
-              const SizedBox(height: 15),
               AuthField(
                 hintText: "Email",
                 controller: emailController,
@@ -64,26 +57,45 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               const SizedBox(height: 20),
               const AuthGradientButton(
-                buttonText: "Sign up",
+                buttonText: "Login",
               ),
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      SignUpPage.route()
+                  );
                 },
-                child: RichText(
-                  text: TextSpan(
-                    text: "Already have an account?",
-                    style: Theme.of(context).textTheme.titleMedium,
-                    children: [
-                      TextSpan(
-                        text: " Sign in",
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppPallete.gradient2,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      )
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        SignUpPage.route()
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't have an account?",
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleMedium,
+                      children: [
+                        TextSpan(
+                          text: " Sign up.",
+                          style:
+                          Theme
+                              .of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                            color: AppPallete.gradient2,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

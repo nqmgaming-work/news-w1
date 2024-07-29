@@ -1,7 +1,8 @@
 import 'package:first_pj/core/themes/app_pallete.dart';
+import 'package:first_pj/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:first_pj/features/auth/presentation/widgets/auth_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/auth_gradient_button.dart';
 
@@ -63,8 +64,19 @@ class _SignUpPageState extends State<SignUpPage> {
                 obscureText: true,
               ),
               const SizedBox(height: 20),
-              const AuthGradientButton(
+              AuthGradientButton(
                 buttonText: "Sign up",
+                onPressed: () {
+                  if (fromKey.currentState!.validate()) {
+                    context.read<AuthBloc>().add(
+                          AuthSignUp(
+                            name: nameController.text.trim(),
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                          ),
+                        );
+                  }
+                },
               ),
               const SizedBox(height: 20),
               GestureDetector(
@@ -78,10 +90,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       TextSpan(
                         text: " Sign in",
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppPallete.gradient2,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppPallete.gradient2,
+                                  fontWeight: FontWeight.bold,
+                                ),
                       )
                     ],
                   ),

@@ -1,8 +1,9 @@
 import 'package:first_pj/core/error/failures.dart';
 import 'package:first_pj/core/usecases/usecase.dart';
-import 'package:first_pj/features/auth/domain/entities/user.dart';
 import 'package:first_pj/features/auth/domain/repositoty/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/entities/user.dart';
 
 class UserSignUp implements UseCase<User, UserSignUpParams> {
   final AuthRepository authRepository;

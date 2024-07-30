@@ -14,7 +14,7 @@ Future main() async {
         create: (_) => serviceLocator<AuthBloc>(),
       )
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 

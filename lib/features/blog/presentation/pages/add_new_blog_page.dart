@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:first_pj/core/themes/app_pallete.dart';
+import 'package:first_pj/core/utils/pick_image.dart';
 import 'package:first_pj/features/blog/presentation/widgets/blog_editor.dart';
 import 'package:fleather/fleather.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddNewBlogPage extends StatefulWidget {
@@ -18,6 +22,15 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
   final titleController = FleatherController();
   final contentController = FleatherController();
   List<String> selectedTopics = [];
+
+  File? image;
+
+  void selectImage() async {
+    final pickedImage = await pickImage();
+    setState(() {
+      image = pickedImage;
+    });
+  }
 
   @override
   void dispose() {
@@ -39,32 +52,67 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            DottedBorder(
-              color: AppPallete.borderColor,
-              dashPattern: const [10, 4],
-              radius: const Radius.circular(12),
-              borderType: BorderType.RRect,
-              strokeCap: StrokeCap.round,
-              child: const SizedBox(
-                height: 150,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.folder_open,
-                      size: 40,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      'Add Image',
-                      style: TextStyle(fontSize: 15),
+            GestureDetector(
+              onTap: selectImage,
+              child: image == null
+                  ? DottedBorder(
+                      color: AppPallete.borderColor,
+                      dashPattern: const [10, 4],
+                      radius: const Radius.circular(12),
+                      borderType: BorderType.RRect,
+                      strokeCap: StrokeCap.round,
+                      child: const SizedBox(
+                        height: 150,
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.folder_open,
+                              size: 40,
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Add Image',
+                              style: TextStyle(fontSize: 15),
+                            )
+                          ],
+                        ),
+                      ),
                     )
-                  ],
-                ),
-              ),
+                  : Container(
+                      height: 150,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                          image: FileImage(image!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.folder_open,
+                              size: 40,
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Change Image',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
             ),
             const SizedBox(
               height: 20,

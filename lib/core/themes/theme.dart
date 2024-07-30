@@ -23,6 +23,12 @@ class ThemeApp {
       backgroundColor: AppPallete.backgroundColor,
       elevation: 0,
       iconTheme: IconThemeData(color: AppPallete.whiteColor),
+    ),
+    chipTheme: const ChipThemeData(
+      color: MaterialStatePropertyAll(AppPallete.backgroundColor),
+      side: BorderSide.none,
+      labelStyle: TextStyle(color: AppPallete.whiteColor),
+
     )
   );
 }

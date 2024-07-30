@@ -1,6 +1,7 @@
 import 'package:first_pj/core/error/exceptons.dart';
 import 'package:first_pj/core/error/failures.dart';
 import 'package:first_pj/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:first_pj/features/auth/domain/entities/user.dart';
 import 'package:first_pj/features/auth/domain/repositoty/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -10,36 +11,38 @@ class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this.authRemoteDataSource);
 
   @override
-  Future<Either<Failure, String>> loginWithEmailPassword({
+  Future<Either<Failure, User>> loginWithEmailPassword({
     required String email,
     required String password,
   }) async {
     try {
-      final userId = authRemoteDataSource.loginWithEmailPassword(
+      final user = await authRemoteDataSource.loginWithEmailPassword(
         email: email,
         password: password,
       );
-      return Right(userId as String);
+      return Right(user);
     } on ServerException catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(
+        Failure(message: e.toString()),
+      );
     }
   }
 
   @override
-  Future<Either<Failure, String>> signUpWithEmailPassword({
+  Future<Either<Failure, User>> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
   }) async {
     try {
-      final userId = await authRemoteDataSource.signUpWithEmailPassword(
+      final user = await authRemoteDataSource.signUpWithEmailPassword(
         name: name,
         email: email,
         password: password,
       );
-      return Right(userId);
+      return Right(user);
     } on ServerException catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(Failure(message: e.toString()));
     }
   }
 }

@@ -17,11 +17,12 @@ class ThemeApp {
       enabledBorder: _border(),
       focusedBorder: _border(AppPallete.gradient2),
       errorBorder: _border(AppPallete.errorColor),
+      focusedErrorBorder: _border(AppPallete.errorColor),
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppPallete.backgroundColor,
       elevation: 0,
-      iconTheme: const IconThemeData(color: AppPallete.whiteColor),
+      iconTheme: IconThemeData(color: AppPallete.whiteColor),
     )
   );
 }

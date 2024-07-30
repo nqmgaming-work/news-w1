@@ -1,14 +1,15 @@
 import 'package:first_pj/core/error/exceptons.dart';
+import 'package:first_pj/features/auth/data/model/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signUpWithEmailPassword({
+  Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<String> loginWithEmailPassword({
+  Future<UserModel> loginWithEmailPassword({
     required String email,
     required String password,
   });
@@ -20,7 +21,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this.supabaseClient);
 
   @override
-  Future<String> loginWithEmailPassword({
+  Future<UserModel> loginWithEmailPassword({
     required String email,
     required String password,
   }) async {
@@ -28,31 +29,34 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final response = await supabaseClient.auth
           .signInWithPassword(email: email, password: password);
       if (response.user == null) {
-        throw ServerException('User is null!');
+        throw ServerException(message: 'User is null!');
       }
-      return response.user!.id;
+
+      return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
-      throw ServerException(e.toString());
+      throw ServerException(message: e.toString());
     }
   }
 
   @override
-  Future<String> signUpWithEmailPassword({
+  Future<UserModel> signUpWithEmailPassword({
     required String name,
     required String email,
     required String password,
   }) async {
     try {
-      final response = await supabaseClient.auth
-          .signUp(email: email, password: password, data: {
-        "name": name,
-      });
+      final response = await supabaseClient.auth.signUp(
+        email: email,
+        password: password,
+        data: {"name": name},
+      );
       if (response.user == null) {
-        throw ServerException('User is null!');
+        throw ServerException(message: "'User is null!'");
       }
-      return response.user!.id;
+      return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
-      throw ServerException(e.toString());
+      print("Error: $e");
+      throw ServerException(message: e.toString());
     }
   }
 }

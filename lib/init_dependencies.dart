@@ -7,6 +7,7 @@ import 'package:first_pj/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:first_pj/features/blog/data/datasources/blog_remote_data_source.dart';
 import 'package:first_pj/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:first_pj/features/blog/domain/repositories/blog_repository.dart';
+import 'package:first_pj/features/blog/domain/usecase/get_all_blogs.dart';
 import 'package:first_pj/features/blog/domain/usecase/upload_blog.dart';
 import 'package:first_pj/features/blog/presentation/blog/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -85,8 +86,14 @@ void _initBlog() {
     ..registerFactory<UploadBlog>(
       () => UploadBlog(blogRepository: serviceLocator<BlogRepository>()),
     )
+    ..registerFactory<GetAllBlogs>(
+      () => GetAllBlogs(blogRepository: serviceLocator<BlogRepository>()),
+    )
     // Blocs
     ..registerLazySingleton<BlogBloc>(
-      () => BlogBloc(serviceLocator<UploadBlog>()),
+      () => BlogBloc(
+        uploadBlog: serviceLocator<UploadBlog>(),
+        getAllBlogs: serviceLocator<GetAllBlogs>(),
+      ),
     );
 }

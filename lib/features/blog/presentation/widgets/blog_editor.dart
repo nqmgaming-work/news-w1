@@ -1,8 +1,7 @@
-import 'package:fleather/fleather.dart';
 import 'package:flutter/material.dart';
 
 class BlogEditor extends StatelessWidget {
-  final FleatherController controller;
+  final TextEditingController controller;
   final String hintText;
 
   const BlogEditor(
@@ -10,12 +9,18 @@ class BlogEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FleatherField(
+    return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
       ),
-
+      maxLines: null,
+      validator: (value) {
+        if (value!.trim().isEmpty) {
+          return 'Please enter some text';
+        }
+        return null;
+      },
     );
   }
 }

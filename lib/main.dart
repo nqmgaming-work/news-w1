@@ -2,6 +2,7 @@ import 'package:first_pj/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:first_pj/core/themes/theme.dart';
 import 'package:first_pj/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:first_pj/features/auth/presentation/pages/login_page.dart';
+import 'package:first_pj/features/blog/presentation/blog/blog_bloc.dart';
 import 'package:first_pj/features/blog/presentation/pages/blog_page.dart';
 import 'package:first_pj/init_dependencies.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,9 @@ Future main() async {
       ),
       BlocProvider(
         create: (_) => serviceLocator<AuthBloc>(),
+      ),
+      BlocProvider(
+        create: (_) => serviceLocator<BlogBloc>(),
       )
     ],
     child: const MyApp(),

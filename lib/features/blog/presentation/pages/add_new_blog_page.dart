@@ -202,12 +202,17 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                           .toList(),
                     ),
                   ),
-                  BlogEditor(controller: titleController, hintText: "Title"),
+                  BlogEditor(
+                    isTitle: true,
+                    controller: titleController,
+                    hintText: "Title",
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
                   Expanded(
                     child: BlogEditor(
+                      isTitle: false,
                       controller: contentController,
                       hintText: "Content",
                     ),

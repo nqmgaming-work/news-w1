@@ -1,7 +1,10 @@
 import 'package:first_pj/core/common/widgets/loader.dart';
+import 'package:first_pj/core/themes/app_pallete.dart';
+import 'package:first_pj/core/utils/random_color_blog_card.dart';
 import 'package:first_pj/core/utils/show_snackbar.dart';
 import 'package:first_pj/features/blog/presentation/blog/blog_bloc.dart';
 import 'package:first_pj/features/blog/presentation/pages/add_new_blog_page.dart';
+import 'package:first_pj/features/blog/presentation/widgets/blog_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,9 +54,9 @@ class _BlogPageState extends State<BlogPage> {
               itemCount: state.blogs.length,
               itemBuilder: (context, index) {
                 final blog = state.blogs[index];
-                return ListTile(
-                  title: Text(blog.title),
-                  subtitle: Text(blog.content),
+                return BlogCard(
+                  blog: blog,
+                  color: randomColor(index: index),
                 );
               },
             );

@@ -74,6 +74,8 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
               posterName: blog['profiles']['name'] as String,
             ),
           )
+          .toList()
+          .reversed
           .toList();
     } catch (e) {
       throw ServerException(message: e.toString());
